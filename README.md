@@ -8,6 +8,23 @@ that is driving cool things!
  - [compare-ubuntus](examples/compare-ubuntus): This is a very basic example of using the tool to compare ubuntu containers
  - [container-api](https://www.github.com/singularityhub/api) that will serve a static API for Singularity Hub container packages and files
  - [compare containers](examples/compare-containers): to generate visualizations to compare containers on demand.
+   - and see the [demo](https://singularityhub.github.io/container-diff/examples/demo) of outputs from here!
+
+## Quick Start
+To see it in action, quickly, you can try the third of the options above, and run for two of your favorite Docker containers.
+See more detail at the third link for how to change this up!
+
+```bash
+mkdir -p /tmp/web
+docker run -v /tmp/web:/data -p 8888:8888 -it vanessa/container-diff centos:6 centos:7
+```
+
+An an [EXAMPLE](https://singularityhub.github.io/container-diff/examples/demo) is provided. The biggest differences between using the executable natively (first or second options) and in a Docker container (third option) are the following:
+
+ - the Docker container does an [image.export](http://singularity.lbl.gov/docs-export) instead of a build because it requires root. If we try doing build with root it strangely fails. 
+ - the Docker container can handle Singularity and/or Docker images (or other types supported by container-diff), while the native version doesn't have any logic to just run container-diff on a Docker image. It's just intended for singularity (and you could call the container-diff command yourself for other types!)
+
+For more (verbosity) about use cases, see my [writing about container-diff](https://vsoch.github.io/2018/container-diff) post!
 
 
 ## Analysis Metrics

@@ -1,0 +1,114 @@
+<head>
+  <!-- Plotly.js -->
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+
+<body>
+  
+  <div id="myDiv"></div>
+  <script>
+
+// var xValues = ['A', 'B', 'C', 'D', 'E'];
+var xValues = ['ubuntu:12.04', 'ubuntu:14.04', 'ubuntu:16.04', 'ubuntu:17.04', 'ubuntu:18.04'];
+
+// var yValues = ['W', 'X', 'Y', 'Z'];
+var yValues = ['ubuntu:12.04', 'ubuntu:14.04', 'ubuntu:16.04', 'ubuntu:17.04', 'ubuntu:18.04'];
+
+// var zValues = [
+//  [0.00, 0.00, 0.75, 0.75, 0.00],
+//  [0.00, 0.00, 0.75, 0.75, 0.00],
+//  [0.75, 0.75, 0.75, 0.75, 0.75],
+//  [0.00, 0.00, 0.00, 0.75, 0.00]
+// ];
+
+var zValues = [ [1.0, 0.6189483657034581, 0.4740330686867215, 0.47307008731937256, 0.3430839589265683],
+[0.6189483657034581, 1.0, 0.39535011240883916, 0.3869562725657631, 0.26812449524756166],
+[0.4740330686867215, 0.39535011240883916, 1.0, 0.8569725864123957, 0.6757687012391005],
+[0.47307008731937256, 0.3869562725657631, 0.8569725864123957, 1.0, 0.7676589303733602],
+[0.3430839589265683, 0.26812449524756166, 0.6757687012391005, 0.7676589303733602, 1.0] ];
+
+var colorscaleValue = [
+  [0, '#3D9970'],
+  [1, '#001f3f']
+];
+
+var data = [{
+  x: xValues,
+  y: yValues,
+  z: zValues,
+  type: 'heatmap',
+  colorscale: colorscaleValue,
+  showscale: false
+}];
+
+var layout = {
+  title: 'Similarity of Containers based on Filesystem',
+  annotations: [],
+  xaxis: {
+    ticks: '',
+    side: 'top'
+  },
+  yaxis: {
+    ticks: '',
+    ticksuffix: ' ',
+    width: 700,
+    height: 900,
+    autosize: false
+  }
+};
+
+for ( var i = 0; i < yValues.length; i++ ) {
+  for ( var j = 0; j < xValues.length; j++ ) {
+    var currentValue = zValues[i][j];
+    if (currentValue != 0.0) {
+      var textColor = 'white';
+    }else{
+      var textColor = 'black';
+    }
+    var result = {
+      xref: 'x1',
+      yref: 'y1',
+      x: xValues[j],
+      y: yValues[i],
+      text: zValues[i][j],
+      font: {
+        family: 'Arial',
+        size: 12,
+        color: 'rgb(50, 171, 96)'
+      },
+      showarrow: false,
+      font: {
+        color: textColor
+      }
+    };
+    layout.annotations.push(result);
+  }
+}
+Plotly.newPlot('myDiv', data, layout);
+  </script>
+<br><div><h2>View Comparison</h2><ul><li><a href="ubuntu12.04-ubuntu12.04.html">ubuntu:12.04 vs. ubuntu:12.04</a></li>
+<li><a href="ubuntu12.04-ubuntu14.04.html">ubuntu:12.04 vs. ubuntu:14.04</a></li>
+<li><a href="ubuntu12.04-ubuntu16.04.html">ubuntu:12.04 vs. ubuntu:16.04</a></li>
+<li><a href="ubuntu12.04-ubuntu17.04.html">ubuntu:12.04 vs. ubuntu:17.04</a></li>
+<li><a href="ubuntu12.04-ubuntu18.04.html">ubuntu:12.04 vs. ubuntu:18.04</a></li>
+<li><a href="ubuntu14.04-ubuntu12.04.html">ubuntu:14.04 vs. ubuntu:12.04</a></li>
+<li><a href="ubuntu14.04-ubuntu14.04.html">ubuntu:14.04 vs. ubuntu:14.04</a></li>
+<li><a href="ubuntu14.04-ubuntu16.04.html">ubuntu:14.04 vs. ubuntu:16.04</a></li>
+<li><a href="ubuntu14.04-ubuntu17.04.html">ubuntu:14.04 vs. ubuntu:17.04</a></li>
+<li><a href="ubuntu14.04-ubuntu18.04.html">ubuntu:14.04 vs. ubuntu:18.04</a></li>
+<li><a href="ubuntu16.04-ubuntu12.04.html">ubuntu:16.04 vs. ubuntu:12.04</a></li>
+<li><a href="ubuntu16.04-ubuntu14.04.html">ubuntu:16.04 vs. ubuntu:14.04</a></li>
+<li><a href="ubuntu16.04-ubuntu16.04.html">ubuntu:16.04 vs. ubuntu:16.04</a></li>
+<li><a href="ubuntu16.04-ubuntu17.04.html">ubuntu:16.04 vs. ubuntu:17.04</a></li>
+<li><a href="ubuntu16.04-ubuntu18.04.html">ubuntu:16.04 vs. ubuntu:18.04</a></li>
+<li><a href="ubuntu17.04-ubuntu12.04.html">ubuntu:17.04 vs. ubuntu:12.04</a></li>
+<li><a href="ubuntu17.04-ubuntu14.04.html">ubuntu:17.04 vs. ubuntu:14.04</a></li>
+<li><a href="ubuntu17.04-ubuntu16.04.html">ubuntu:17.04 vs. ubuntu:16.04</a></li>
+<li><a href="ubuntu17.04-ubuntu17.04.html">ubuntu:17.04 vs. ubuntu:17.04</a></li>
+<li><a href="ubuntu17.04-ubuntu18.04.html">ubuntu:17.04 vs. ubuntu:18.04</a></li>
+<li><a href="ubuntu18.04-ubuntu12.04.html">ubuntu:18.04 vs. ubuntu:12.04</a></li>
+<li><a href="ubuntu18.04-ubuntu14.04.html">ubuntu:18.04 vs. ubuntu:14.04</a></li>
+<li><a href="ubuntu18.04-ubuntu16.04.html">ubuntu:18.04 vs. ubuntu:16.04</a></li>
+<li><a href="ubuntu18.04-ubuntu17.04.html">ubuntu:18.04 vs. ubuntu:17.04</a></li>
+<li><a href="ubuntu18.04-ubuntu18.04.html">ubuntu:18.04 vs. ubuntu:18.04</a></li>
+</ul></div></body>

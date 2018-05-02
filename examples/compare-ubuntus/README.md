@@ -36,4 +36,9 @@ If you want to move the output from the present working directory to a data fold
 # mv *.json data
 ```
 
+And there is an example of using Seaborn (from within Python) to make this
+image from the tab separated file:
+
+![ubuntus.png](ubuntus.png)
+
 That's it!

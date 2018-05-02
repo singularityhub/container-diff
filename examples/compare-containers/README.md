@@ -29,10 +29,9 @@ the various extraction tools print out error / warning messages for what I think
 (non existing files) that are attempting to be assessed for a size:
 
 ### Example
-A quick example of the command run to compare a bunch of Core OS is shown here:
+A quick example of the command run to compare a bunch of various operating systems is shown here:
 
  - [EXAMPLE](https://singularityhub.github.io/container-diff/examples/demo)
-
 
 ### Compare Docker containers
 
@@ -69,10 +68,13 @@ container. Here is an example with `shub://vsoch/hello-world`:
 docker run -v /tmp/web:/data --privileged -p 8888:8888 -it vanessa/container-diff centos:6 shub://vsoch/hello-world
 ```
 
-I think we also need the privileged tag, at least we did with earlier versions of Singularity, but maybe
-that has changed.
+I think we also need the privileged tag, at least we did with earlier versions of Singularity.
 
+To generate the example, I ran this command:
 
+```bash
+docker run -v /tmp/web:/data -p 8888:8888 -it vanessa/container-diff ubuntu:12.04 ubuntu:14.04 ubuntu:16.04 ubuntu:17.04 ubuntu:18.04
+```
 
 ## Development
 Make sure you are in the directory with some web folder - we will map this to
