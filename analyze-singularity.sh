@@ -103,6 +103,7 @@ container-diff analyze ${container_package} --json "$@" > ${output_file}
 echo "(7/7) Cleaning up!"
 rm -rf ${build_sandbox}
 rm -rf ${build_package}
+rm -rf ${container_package}
 
 echo "Complete. Result is at:"
 echo "${output_file}"

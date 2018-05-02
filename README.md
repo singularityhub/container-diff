@@ -2,7 +2,8 @@
 
 [Container Diff](https://github.com/GoogleContainerTools/container-diff) is a tool provided by Google
 to do static analysis and comparison of images. You can imagine this would be very useful to do for Singularity 
-images as well, and so this wrapper provides functions to do that!
+images as well, and so this wrapper provides functions to do that! This is the underlying library
+that is driving [container-api](https://www.github.com/singularityhub/api) that will serve a simple 
 
 ## Analysis Metrics
 There are multiple metrics you might want to look at to analyze an image. 
