@@ -18,21 +18,27 @@ for your use!
 ## Build
 
 ```
-docker build -t vanessa/compare-containers .
+docker build -t vanessa/container-diff .
 ```
 
 ## Usage
-The compare-containers image can support comparison between Docker and Singularity containers,
+The container-diff image can support comparison between Docker and Singularity containers,
 in any combination that you like. We do this by way of exporting Singularity containers to .tar.gz,
 which is installed. Usage looks like any of the following. Note that for all of these,
 the various extraction tools print out error / warning messages for what I think are symlinked 
 (non existing files) that are attempting to be assessed for a size:
 
+### Example
+A quick example of the command run to compare a bunch of Core OS is shown here:
 
-```
-# Compare two Docker containers
+ - [EXAMPLE](https://singularityhub.github.io/container-diff/examples/demo)
+
+
+### Compare Docker containers
+
+```bash
 mkdir -p /tmp/web
-docker run -v /tmp/web:/data -p 8888:8888 -it vanessa/compare-containers centos:6 centos:7
+docker run -v /tmp/web:/data -p 8888:8888 -it vanessa/container-diff centos:6 centos:7
 ```
 ```
 1. Staring extraction for 2 containers.
@@ -41,7 +47,6 @@ docker run -v /tmp/web:/data -p 8888:8888 -it vanessa/compare-containers centos:
 2. Calculating comparisons
 Open browser to http://0.0.0.0:8888
 ```
-
  - the container will serve it's content at port 8888, so you need to expose it
  - you should bind to /data if you want to keep the outputs.
 
@@ -55,10 +60,24 @@ centos:6-to-centos:7.html  index.html
 centos:7-files.json        information-coefficient-scores.tsv
 ```
 
+### Compare Singularity containers
+If you do this comparison with a Singularity container, this means you can reference 
+them either with an `shub://` or `docker://` uri, or a Singularity image mapped to the
+container. Here is an example with `shub://vsoch/hello-world`:
+
+```bash
+docker run -v /tmp/web:/data --privileged -p 8888:8888 -it vanessa/container-diff centos:6 shub://vsoch/hello-world
+```
+
+I think we also need the privileged tag, at least we did with earlier versions of Singularity, but maybe
+that has changed.
+
+
+
 ## Development
 Make sure you are in the directory with some web folder - we will map this to
 our container so the web report (output) and data outputs are persisted on the host.
 
 ```
-docker run -v $PWD:/code -v $PWD/web:/data -p 80:80 --entrypoint bash -it vanessa/compare-containers
+docker run -v $PWD:/code -v $PWD/web:/data -p 80:80 --entrypoint bash -it vanessa/container-diff
 ```

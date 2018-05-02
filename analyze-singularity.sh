@@ -78,7 +78,7 @@ mkdir -p ${layer_folder}
 
 # If running as user, make sandbox
 
-if [ "$EUID" -ne 0 ]
+if [ "$EUID" -ne 0 ]; then
     echo "(2/7) Exporting filesystem..."
     singularity build --sandbox ${build_sandbox} ${image}
 

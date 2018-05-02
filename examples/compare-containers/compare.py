@@ -197,7 +197,7 @@ def main():
             tree = make_container_tree(allfiles, labels=labels)
             html = get_template('container_tree', {'{{ files | safe }}': json.dumps(tree['files']),
                                                    '{{ graph | safe }}': json.dumps(tree['graph']),
-                                                   '{{ container_name }}': "%s vs. %s Tree" %(name1, name2)})
+                                                   '{{ container_name }}': "%s --> %s Tree" %(name1, name2)})
 
             html_file = '%s/%s.html' %(output,name)
             htmls['%s vs. %s' %(name1, name2)] = html_file
