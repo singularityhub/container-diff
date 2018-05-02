@@ -2,7 +2,8 @@
 
 # This example will show how to extract json objects of files and packages
 # for sets of images. In this case, we will extract the ubuntu family of
-# images to see if we can see changes over the years!
+# images to see if we can see changes over the years! If you want the version of
+# this script intended for use in the Docker container, see entrypoint.sh
 
 # I tested running with sudo
 # sudo -E ./compare_ubuntu.sh
@@ -12,7 +13,7 @@ declare -a uris=("ubuntu:12.04" "ubuntu:14.04" "ubuntu:16.04" "ubuntu:17.04" "ub
 # Make sure you are sitting in the examples directory, or have 
 # analyze-singularity on your path!
 
-PATH=$PATH:../
+PATH=$PATH:../../
 
 ## now loop through the above array
 for docker_uri in "${uris[@]}"

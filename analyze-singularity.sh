@@ -76,11 +76,23 @@ layer_folder="${build_package}/${container_id}"     # layer folder in package
 echo "(1/7) Creating build folders..."
 mkdir -p ${layer_folder}
 
-echo "(2/7) Exporting filesystem..."
-singularity build --sandbox ${build_sandbox} ${image}
+# If running as user, make sandbox
 
-echo "(3/7) Creating layer..."
-cd ${build_sandbox} && tar -cf ${layer_folder}/layer.tar * --ignore-failed-read && cd ${HERE}
+if [ "$EUID" -ne 0 ]
+    echo "(2/7) Exporting filesystem..."
+    singularity build --sandbox ${build_sandbox} ${image}
+
+    echo "(3/7) Creating layer..."
+    cd ${build_sandbox} && tar -cf ${layer_folder}/layer.tar * --ignore-failed-read && cd ${HERE}
+
+# If running as root (in Docker container) use image.export
+else
+    echo "(2/7) Exporting filesystem..."
+    singularity image.export -f ${layer_folder}/layer.tar ${image}
+
+    echo "(3/7) Creating layer..."
+
+fi
 
 
 # "Metadata" ###################################################################
